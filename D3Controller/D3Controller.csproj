@@ -44,6 +44,7 @@
     <Compile Include="ButtonEventArgs.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="StickEventArgs.cs" />
+    <Compile Include="StickHelper.cs" />
     <Compile Include="TimeChecker.cs" />
     <Compile Include="TriggerEventArgs.cs" />
     <Compile Include="XInputController.cs" />

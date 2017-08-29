@@ -69,18 +69,19 @@ namespace ControllerTest
 					
 					var ellipse = App.Current.MainWindow.FindName($"{e.Stick}S") as Ellipse;
 					var b = App.Current.MainWindow.FindName($"{e.Stick}SB") as TextBlock;
-					int X = ConvertValue(e.X);
-					int Y = ConvertValue(e.Y);
-					double Theta = Math.Atan2(e.Y, e.X);
+					var Point = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), 50);
+
+					int X = (int)Math.Round(Point.Item1) + 50;
+					int Y = (int)Math.Round(Point.Item2) + 50;
 					b.Text = $"{X},{Y}";
-					Canvas.SetLeft(ellipse, (int)(50 + Math.Cos(Theta) * Math.Abs((int)e.X) / 1000));
-					Canvas.SetBottom(ellipse, (int)(50 + Math.Sin(Theta) * Math.Abs((int)e.Y) / 1000));
+					Canvas.SetLeft(ellipse, X);
+					Canvas.SetBottom(ellipse, Y);
 				});
 		}
 		#endregion
 
 		#region Helper
-		int ConvertValue(short Value) => (int)Math.Round((double)100 / 65535 * Value + 50);
+		int ConvertValue(short Value) => (int)Math.Round((double)100 / 65535 * Value);
 		#endregion
 
 		#region Interface Implement
