@@ -1,0 +1,109 @@
+﻿<Window x:Class="ControllerTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ControllerTest"
+        mc:Ignorable="d"
+        Title="Controller Test" Height="500" Width="350"
+		Loaded="Window_Loaded" Closing="Window_Closing"
+		Background="Black" Foreground="White" ResizeMode="NoResize" WindowStyle="ToolWindow">
+
+	<Window.Resources>
+		<Style TargetType="local:TriggerButton">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="IsHitTestVisible" Value="False"/>
+		</Style>
+		<Style TargetType="local:GlowingButton">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="IsHitTestVisible" Value="False"/>
+		</Style>
+	</Window.Resources>
+	
+    <Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="2*"/>
+			<RowDefinition Height="2*"/>
+		</Grid.RowDefinitions>
+		
+		<GroupBox Header="Left Trigger" Grid.Row="0" Grid.Column="0">
+			<local:TriggerButton x:Name="LeftT"/>
+		</GroupBox>
+		<GroupBox Header="Right Trigger" Grid.Row="0" Grid.Column="1">
+			<local:TriggerButton x:Name="RightT"/>
+		</GroupBox>
+
+		<GroupBox Header="Left Shoulder" Grid.Row="1" Grid.Column="0">
+			<local:GlowingButton x:Name="LeftShoulder"/>
+		</GroupBox>
+		<GroupBox Header="Right Shoulder" Grid.Row="1" Grid.Column="1">
+			<local:GlowingButton x:Name="RightShoulder"/>
+		</GroupBox>
+
+		<GroupBox Header="Arrow Buttons" Grid.Row="2" Grid.Column="0">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<local:GlowingButton x:Name="DPadUp" Content="↑" Grid.Row="0" Grid.Column="1"/>
+				<local:GlowingButton x:Name="DPadLeft" Content="←" Grid.Row="1" Grid.Column="0"/>
+				<local:GlowingButton x:Name="DPadRight" Content="→" Grid.Row="1" Grid.Column="2"/>
+				<local:GlowingButton x:Name="DPadDown" Content="↓" Grid.Row="2" Grid.Column="1"/>
+			</Grid>
+		</GroupBox>
+		<GroupBox Header="Buttons" Grid.Row="2" Grid.Column="1">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<local:GlowingButton x:Name="Y" Content="Y" Grid.Row="0" Grid.Column="1"/>
+				<local:GlowingButton x:Name="X" Content="X" Grid.Row="1" Grid.Column="0"/>
+				<local:GlowingButton x:Name="B" Content="B" Grid.Row="1" Grid.Column="2"/>
+				<local:GlowingButton x:Name="A" Content="A" Grid.Row="2" Grid.Column="1"/>
+			</Grid>
+		</GroupBox>
+
+		<GroupBox Header="Left Stick" Grid.Row="3" Grid.Column="0">
+			<local:GlowingButton x:Name="LeftThumb">
+				<Grid>
+					<TextBlock x:Name="LeftSB"/>
+					<Canvas Width="100" Height="100">
+						<Ellipse x:Name="LeftS" Width="10" Height="10" Fill="White"/>
+					</Canvas>
+				</Grid>
+			</local:GlowingButton>
+		</GroupBox>
+		<GroupBox Header="Right Stick" Grid.Row="3" Grid.Column="1">
+			<local:GlowingButton x:Name="RightThumb">
+				<Grid>
+					<TextBlock x:Name="RightSB"/>
+					<Canvas Width="100" Height="100">
+						<Ellipse x:Name="RightS" Width="10" Height="10" Fill="White"/>
+					</Canvas>
+				</Grid>
+			</local:GlowingButton>
+		</GroupBox>
+	</Grid>
+</Window>
