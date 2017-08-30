@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Shapes;
 using System.Windows.Controls;
-using System.Threading.Tasks;
+using CodeGenerater.WCFLogger.Client;
 using CodeGenerater.Diablo3.Controller;
 
 namespace ControllerTest
@@ -23,7 +23,9 @@ namespace ControllerTest
 		#region Field
 		XInputController Controller;
 
-		TimeChecker tc = new TimeChecker();
+		ButtonDelay bd = new ButtonDelay();
+
+		LogClient Client = new LogClient("Sample");
 		#endregion
 
 		#region Event Handler
@@ -35,7 +37,7 @@ namespace ControllerTest
 					if (e.Button == PadButtons.None)
 						return;
 
-					if (!tc.CheckTime(e.Button.ToString(), 200))
+					if (!bd.CheckDelay(e.Button))
 						return;
 
 					if (App.Current == null || App.Current.MainWindow == null)

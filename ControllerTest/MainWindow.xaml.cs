@@ -19,8 +19,9 @@ namespace ControllerTest
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			mm = new MainViewModel();
-
 			DataContext = mm;
+
+			Title = $"{SystemParameters.KeyboardDelay}, {SystemParameters.KeyboardSpeed}";
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

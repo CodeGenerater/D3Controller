@@ -41,11 +41,11 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonDelay.cs" />
     <Compile Include="ButtonEventArgs.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="StickEventArgs.cs" />
     <Compile Include="StickHelper.cs" />
-    <Compile Include="TimeChecker.cs" />
     <Compile Include="TriggerEventArgs.cs" />
     <Compile Include="XInputController.cs" />
     <Compile Include="PadButtons.cs" />
