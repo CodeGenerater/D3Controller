@@ -41,14 +41,16 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonDelay.cs" />
-    <Compile Include="ButtonEventArgs.cs" />
-    <Compile Include="Direction.cs" />
-    <Compile Include="StickEventArgs.cs" />
-    <Compile Include="StickHelper.cs" />
-    <Compile Include="TriggerEventArgs.cs" />
+    <Compile Include="EventArgs\ButtonEventArgs.cs" />
+    <Compile Include="Utility\DelayManager.cs" />
+    <Compile Include="Enums\DelayLevel.cs" />
+    <Compile Include="Enums\Direction.cs" />
+    <Compile Include="Utility\Delay.cs" />
+    <Compile Include="EventArgs\StickEventArgs.cs" />
+    <Compile Include="Utility\StickHelper.cs" />
+    <Compile Include="EventArgs\TriggerEventArgs.cs" />
     <Compile Include="XInputController.cs" />
-    <Compile Include="PadButtons.cs" />
+    <Compile Include="Enums\PadButtons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
