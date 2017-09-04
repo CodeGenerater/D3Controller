@@ -18,7 +18,6 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Field
-		DelayManager<PadButtons> ButtonDelay = new DelayManager<PadButtons>();
 		DelayManager<Direction> TriggerDelay = new DelayManager<Direction>(TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(1));
 		DelayManager<Direction> StickDelay = new DelayManager<Direction>(TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(10), TimeSpan.FromMilliseconds(1));
 
@@ -35,7 +34,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 				App.Current.Dispatcher.Invoke(() =>
 				{
 					if (e.Button == PadButtons.None) return;
-					if (!ButtonDelay.CheckDelay(e.Button)) return;
+					if (!SingleInstance<DelayManager<PadButtons>>.Instance.CheckDelay(e.Button)) return;
 					if (App.Current == null || App.Current.MainWindow == null) return;
 					var C = App.Current.MainWindow.FindName(e.Button.ToString()) as Control;
 					if (C == null) return;

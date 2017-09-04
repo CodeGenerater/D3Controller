@@ -47,8 +47,6 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			foreach (var each in Enum.GetNames(typeof(MouseButton)))
 				yield return each;
 		}
-		#endregion
-
-		
+		#endregion		
 	}
 }

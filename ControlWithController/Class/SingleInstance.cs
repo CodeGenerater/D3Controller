@@ -11,6 +11,13 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#region Property
 		public static T Instance
 		{
+			set
+			{
+				if (_Instance != null)
+					throw new ArgumentException();
+
+				_Instance = value;
+			}
 			get
 			{
 				if (_Instance == null)

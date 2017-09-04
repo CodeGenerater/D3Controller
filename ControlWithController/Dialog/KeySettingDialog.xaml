@@ -11,26 +11,7 @@
 		Loaded="Window_Loaded">
 
 	<Window.Resources>
-		<Style TargetType="RadioButton">
-			<Setter Property="Margin" Value="2"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
-		<Style TargetType="CheckBox">
-			<Setter Property="Margin" Value="5"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
-		<Style TargetType="TextBox">
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="Background" Value="Black"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-			<Setter Property="TextAlignment" Value="Center"/>
-			<Setter Property="Margin" Value="5,1,5,1"/>
-		</Style>
-		<local:MacroBindingRuleConverter x:Key="MBRConverter"/>
-		<local:KeyConverter x:Key="KeyConverter"/>
-		<local:MouseButtonConverter x:Key="MBConverter"/>
+		
 	</Window.Resources>
 
 	<Viewbox Width="330" Height="300">
@@ -49,10 +30,10 @@
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Grid.ColumnSpan="2" Text="{Binding Path=Button, StringFormat=[ {0} ]}" TextAlignment="Center" FontSize="15"/>
-			<Rectangle Grid.Row="1" Grid.ColumnSpan="2" Fill="#FF151515"/>
+			<Rectangle Grid.Row="1" Grid.ColumnSpan="2" Fill="{StaticResource RectangleFillBrush}"/>
 			<CheckBox Grid.Row="2" Content="Keyboard" IsChecked="{Binding Path=BindToKeyboard}"/>
 			<TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" KeyDown="TextBox_KeyDown" Width="100" Text="{Binding Path=Key, Converter={StaticResource KeyConverter}}"/>
-			<Rectangle Grid.Row="3" Grid.ColumnSpan="2" Fill="#FF151515"/>
+			<Rectangle Grid.Row="3" Grid.ColumnSpan="2" Fill="{StaticResource RectangleFillBrush}"/>
 			<CheckBox Grid.Row="4" Content="Mouse" IsChecked="{Binding Path=BindToMouse}"/>
 			<Grid Grid.Row="4" Grid.Column="1">
 				<Grid.RowDefinitions>
@@ -75,7 +56,7 @@
 					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=MoveY}"/>
 				</Grid>
 			</Grid>
-			<Rectangle Grid.Row="5" Grid.ColumnSpan="2" Fill="#FF151515"/>
+			<Rectangle Grid.Row="5" Grid.ColumnSpan="2" Fill="{StaticResource RectangleFillBrush}"/>
 			<CheckBox Grid.Row="6" Content="Macro" IsChecked="{Binding Path=BindToMacro}"/>
 			<Grid Grid.Row="6" Grid.Column="1">
 				<Grid.RowDefinitions>
