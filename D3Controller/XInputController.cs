@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using CodeGenerater.WCFLogger.Client;
 using x = SharpDX.XInput;
 
 namespace CodeGenerater.Diablo3.Controller
@@ -12,7 +13,7 @@ namespace CodeGenerater.Diablo3.Controller
 			Controller = new x.Controller(x.UserIndex.One);
 
 			T = new Thread(EventLoop);
-
+			Continue = true;
 			T.Start();
 		}
 		#endregion
@@ -22,7 +23,7 @@ namespace CodeGenerater.Diablo3.Controller
 
 		Thread T;
 
-		bool Continue = true;
+		volatile bool Continue;
 		#endregion
 
 		#region Event
@@ -58,12 +59,6 @@ namespace CodeGenerater.Diablo3.Controller
 		public void Dispose()
 		{
 			Continue = false;
-
-			if (T != null)
-			{
-				T.Abort();
-				T = null;
-			}
 		}
 		#endregion
 	}

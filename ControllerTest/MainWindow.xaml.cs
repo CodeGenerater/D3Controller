@@ -29,5 +29,9 @@ namespace ControllerTest
 			mm.Dispose();
 		}
 		#endregion
+
+		private void Window_Closed(object sender, System.EventArgs e)
+		{
+		}
 	}
 }

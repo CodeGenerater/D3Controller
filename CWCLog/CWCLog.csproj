@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{61F6CAA4-D781-4A46-A526-86BAAF247F3B}</ProjectGuid>
+    <ProjectGuid>{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CodeGenerater.Diablo3.ControlWithController</RootNamespace>
-    <AssemblyName>ControlWithController</AssemblyName>
+    <RootNamespace>CWCLog</RootNamespace>
+    <AssemblyName>CWCLog</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\ControlWithController\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,16 +28,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\ControlWithController\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CodeGenerater.Macro.HardwareControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MacroSolution\HardwareControl\bin\Release\CodeGenerater.Macro.HardwareControl.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,16 +52,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class\BindingSettingManager.cs" />
-    <Compile Include="Class\SingleInstance.cs" />
-    <Compile Include="Class\StickSetting.cs" />
-    <Compile Include="Dialog\StickSettingDialog.xaml.cs">
-      <DependentUpon>StickSettingDialog.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Dialog\KeySettingDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,27 +60,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class\ButtonReactionManager.cs" />
-    <Compile Include="Class\GlowManager.cs" />
-    <Compile Include="Dialog\KeySettingDialog.xaml.cs">
-      <DependentUpon>KeySettingDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Class\Converter\KeyConverter.cs" />
-    <Compile Include="Class\KeySetting.cs" />
-    <Compile Include="Class\Logger.cs" />
-    <Compile Include="Enum\MacroBindingRule.cs" />
-    <Compile Include="Class\Converter\MacroBindingRuleConverter.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Dialog\StickSettingDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\Converter\MouseButtonConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -119,16 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\D3Controller\D3Controller.csproj">
-      <Project>{c5aa2567-bf96-4382-8ce8-0c26d3979987}</Project>
-      <Name>D3Controller</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\D3Macro\D3Macro.csproj">
-      <Project>{c73ce313-2e1b-4998-98a5-a62c77da510f}</Project>
-      <Name>D3Macro</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

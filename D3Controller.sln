@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerForImpale", "ControllerForImpale\ControllerForImpale.csproj", "{5AAF62D6-5D5F-4E20-A713-9F23AEDA4071}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{8DAC7518-F77A-4806-B867-3C8DE7210C2A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApp", "TestApp", "{6EC6883C-64AD-43FE-B21B-A2AE13A768DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWCLog", "CWCLog\CWCLog.csproj", "{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{8DAC7518-F77A-4806-B867-3C8DE7210C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DAC7518-F77A-4806-B867-3C8DE7210C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DAC7518-F77A-4806-B867-3C8DE7210C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{C5AA2567-BF96-4382-8CE8-0C26D3979987} = {0054F6AB-B9DA-44CD-95EC-E7BDF9B061B6}
 		{61F6CAA4-D781-4A46-A526-86BAAF247F3B} = {CBE19510-F6A4-4ADD-9519-CD714B317B2A}
 		{8DAC7518-F77A-4806-B867-3C8DE7210C2A} = {6EC6883C-64AD-43FE-B21B-A2AE13A768DF}
+		{D57B725A-33E3-4FAD-8E65-32A9E9FE98C7} = {CBE19510-F6A4-4ADD-9519-CD714B317B2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7FFDF585-C960-4214-9F03-7909BD25975C}

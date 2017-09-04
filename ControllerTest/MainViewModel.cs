@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Shapes;
 using System.Windows.Controls;
@@ -28,54 +29,72 @@ namespace ControllerTest
 		#region Event Handler
 		private void Controller_ButtonPressed(object sender, ButtonEventArgs e)
 		{
-			App.Current.Dispatcher.Invoke(
-				() =>
-				{
-					if (e.Button == PadButtons.None)
-						return;
+			try
+			{
+				App.Current.Dispatcher.Invoke(
+						() =>
+						{
+							if (e.Button == PadButtons.None)
+								return;
 
-					if (!ButtonDelay.CheckDelay(e.Button))
-						return;
+							if (!ButtonDelay.CheckDelay(e.Button))
+								return;
 
-					if (App.Current == null || App.Current.MainWindow == null)
-						return;
+							if (App.Current == null || App.Current.MainWindow == null)
+								return;
 
-					var gb = App.Current.MainWindow.FindName(e.Button.ToString()) as GlowingButton;
-					gb.Glow();
-				});
+							var gb = App.Current.MainWindow.FindName(e.Button.ToString()) as GlowingButton;
+							gb.Glow();
+						});
+			}
+			catch (Exception)
+			{
+			}
 		}
 
 		private void Controller_TriggerPressed(object sender, TriggerEventArgs e)
 		{
-			App.Current.Dispatcher.Invoke(
-				() =>
-				{
-					if (App.Current == null || App.Current.MainWindow == null)
-						return;
+			try
+			{
+				App.Current.Dispatcher.Invoke(
+						() =>
+						{
+							if (App.Current == null || App.Current.MainWindow == null)
+								return;
 
-					var tb = App.Current.MainWindow.FindName($"{e.Trigger}T") as TriggerButton;
-					tb.Value = e.Value;
-				});
+							var tb = App.Current.MainWindow.FindName($"{e.Trigger}T") as TriggerButton;
+							tb.Value = e.Value;
+						});
+			}
+			catch (Exception)
+			{
+			}
 		}
 
 		private void Controller_StickMoved(object sender, StickEventArgs e)
 		{
-			App.Current.Dispatcher.Invoke(
-				() =>
-				{
-					if (App.Current == null || App.Current.MainWindow == null)
-						return;
-					
-					var ellipse = App.Current.MainWindow.FindName($"{e.Stick}S") as Ellipse;
-					var b = App.Current.MainWindow.FindName($"{e.Stick}SB") as TextBlock;
-					var Point = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), 50);
+			try
+			{
+				App.Current.Dispatcher.Invoke(
+						() =>
+						{
+							if (App.Current == null || App.Current.MainWindow == null)
+								return;
 
-					int X = (int)Math.Round(Point.Item1) + 50;
-					int Y = (int)Math.Round(Point.Item2) + 50;
-					b.Text = $"{X},{Y}";
-					Canvas.SetLeft(ellipse, X);
-					Canvas.SetBottom(ellipse, Y);
-				});
+							var ellipse = App.Current.MainWindow.FindName($"{e.Stick}S") as Ellipse;
+							var b = App.Current.MainWindow.FindName($"{e.Stick}SB") as TextBlock;
+							var Point = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), 50);
+
+							int X = (int)Math.Round(Point.Item1) + 50;
+							int Y = (int)Math.Round(Point.Item2) + 50;
+							b.Text = $"{X},{Y}";
+							Canvas.SetLeft(ellipse, X);
+							Canvas.SetBottom(ellipse, Y);
+						});
+			}
+			catch (Exception)
+			{
+			}
 		}
 		#endregion
 

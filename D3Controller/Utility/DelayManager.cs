@@ -6,7 +6,7 @@ namespace CodeGenerater.Diablo3.Controller
 	public class DelayManager<TKey>
 	{
 		#region Constructor
-		public DelayManager() : this(TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(5), TimeSpan.FromMilliseconds(33), TimeSpan.FromMilliseconds(5))
+		public DelayManager() : this(TimeSpan.FromMilliseconds(250), TimeSpan.FromMilliseconds(5), TimeSpan.FromMilliseconds(33), TimeSpan.FromMilliseconds(5))
 		{
 
 		}

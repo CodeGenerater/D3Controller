@@ -39,6 +39,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="WCFLogger">
+      <HintPath>..\..\WCFLogger\WCFLogger\bin\Debug\WCFLogger.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventArgs\ButtonEventArgs.cs" />
