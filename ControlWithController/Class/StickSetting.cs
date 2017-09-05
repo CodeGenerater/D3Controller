@@ -1,10 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using CodeGenerater.Diablo3.Controller;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
-	public class StickSetting : INotifyPropertyChanged
+	[Serializable]
+	public class StickSetting : INotifyPropertyChanged, ISerializable
 	{
 		#region Constructor
 		public StickSetting()
@@ -27,6 +30,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Property
+		[SerializationTarget]
 		public Direction Stick
 		{
 			set
@@ -43,6 +47,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public StickBindingRule StickBindingRule
 		{
 			set
@@ -59,6 +64,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public Range<int> MoveRange
 		{
 			set
@@ -75,6 +81,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public Range<int> AroundRange
 		{
 			set
@@ -91,6 +98,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public Point Offset
 		{
 			set
@@ -109,9 +117,22 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Interface Implement
+		#region INotifyPropertyChaged
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void Notify(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+		#endregion
+		#region ISerializable
+		public void GetObjectData(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Serialize(this, Info);
+		}
+
+		StickSetting(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Deserialize(this, Info);
+		}
+		#endregion
 		#endregion
 	}
 }

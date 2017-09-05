@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeGenerater.Diablo3.Macro;
+using System.Runtime.Serialization;
 using CodeGenerater.Diablo3.Controller;
 using m = CodeGenerater.Macro.HardwareControl.Mouse;
 using k = CodeGenerater.Macro.HardwareControl.Keyboard;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
-	class BindingSettingManager : IDisposable
+	[Serializable]
+	class BindingSettingManager : IDisposable, ISerializable
 	{
 		#region Constructor
 		public BindingSettingManager()
@@ -21,7 +23,10 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Field
+		[SerializationTarget]
 		Dictionary<PadButtons, KeySetting> KeySettingDict;
+
+		[SerializationTarget]
 		Dictionary<Direction, StickSetting> StickSettingDict;
 
 		bool IsDisposed;
@@ -118,13 +123,13 @@ namespace CodeGenerater.Diablo3.ControlWithController
 				{
 					if (!SingleInstance<DelayManager<Direction>>.Instance.CheckDelay(e.Stick)) return;
 					if (App.Current == null || App.Current.MainWindow == null) return;
+					if (e.X == 0 && e.Y == 0) return;
 
 					var Setting = this[e.Stick];
 					
 					switch (Setting.StickBindingRule)
 					{
 						case StickBindingRule.Move:
-							if (e.X == 0 && e.Y == 0) return;
 							var MoveValue = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), Setting.MoveRange.To - Setting.MoveRange.From);
 							m.MoveRelative(
 								(int)Math.Round(MoveValue.Item1 + Setting.MoveRange.From),
@@ -133,8 +138,8 @@ namespace CodeGenerater.Diablo3.ControlWithController
 						case StickBindingRule.Around:
 							var AroundValue = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), Setting.AroundRange.To - Setting.AroundRange.From);
 							m.SetPosition(
-								(int)Math.Round(Setting.Offset.X + AroundValue.Item1 + Setting.AroundRange.From),
-								(int)Math.Round(Setting.Offset.Y + AroundValue.Item2 + Setting.AroundRange.From));
+								(int)Math.Round(Setting.Offset.X + AroundValue.Item1 + (Math.Sign(AroundValue.Item1) < 0 ? -Setting.AroundRange.From : Setting.AroundRange.From)),
+								(int)Math.Round(Setting.Offset.Y - (AroundValue.Item2 + (Math.Sign(AroundValue.Item2) < 0 ? -Setting.AroundRange.From : Setting.AroundRange.From))));
 							break;
 					}
 				});
@@ -147,10 +152,23 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Interface Implement
+		#region IDisposable
 		public void Dispose()
 		{
 			IsDisposed = true;
 		}
+		#endregion
+		#region ISerializable
+		public void GetObjectData(SerializationInfo Info, StreamingContext Context) => SerializationHelper.Serialize(this, Info);
+
+		BindingSettingManager(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Deserialize(this, Info);
+
+			SingleInstance<XInputController>.Instance.ButtonPressed += Controller_ButtonPressed;
+			SingleInstance<XInputController>.Instance.StickMoved += Controller_StickMoved;
+		}
+		#endregion
 		#endregion
 	}
 }

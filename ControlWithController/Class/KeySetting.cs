@@ -1,11 +1,21 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using CodeGenerater.Diablo3.Controller;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
-	public class KeySetting : INotifyPropertyChanged
+	[Serializable]
+	public class KeySetting : INotifyPropertyChanged, ISerializable
 	{
+		#region Constructor
+		public KeySetting()
+		{
+
+		}
+		#endregion
+
 		#region Field
 		PadButtons _Button;
 
@@ -27,6 +37,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Property
+		[SerializationTarget]
 		public PadButtons Button
 		{
 			set
@@ -43,6 +54,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public bool BindToKeyboard
 		{
 			set
@@ -59,6 +71,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public Key Key
 		{
 			set
@@ -75,6 +88,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public bool BindToMacro
 		{
 			set
@@ -91,6 +105,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public MacroBindingRule MacroBindingRule
 		{
 			set
@@ -107,6 +122,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public bool BindToMouse
 		{
 			set
@@ -123,6 +139,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public MouseButton? MouseButton
 		{
 			set
@@ -139,6 +156,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public int MoveX
 		{
 			set
@@ -155,6 +173,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			}
 		}
 
+		[SerializationTarget]
 		public int MoveY
 		{
 			set
@@ -177,6 +196,17 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void Notify(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+		#endregion
+		#region ISerializable
+		public void GetObjectData(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Serialize(this, Info);
+		}
+
+		KeySetting(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Deserialize(this, Info);
+		}
 		#endregion
 		#endregion
 	}

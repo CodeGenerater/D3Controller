@@ -65,6 +65,7 @@
     <Compile Include="Class\Range.cs" />
     <Compile Include="Enum\StickBindingRule.cs" />
     <Compile Include="Class\Converter\StickBindingRuleConverter.cs" />
+    <Compile Include="SerializationHelper.cs" />
     <Compile Include="SerializationManager.cs" />
     <Page Include="Dialog\KeySettingDialog.xaml">
       <SubType>Designer</SubType>

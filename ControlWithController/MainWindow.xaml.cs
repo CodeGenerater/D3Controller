@@ -22,14 +22,13 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#region Event Handler
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			//if(Process.GetProcessesByName("CWCLog").Count() == 0)
-			//	Process.Start(Path.Combine(Environment.CurrentDirectory, "CWCLog"));
-
-			//Logger.Init();
+			SerializationManager.Load();
 		}
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
+			SerializationManager.Save();
+
 			if (SingleInstance<ButtonReactionManager>.IsExist)
 				SingleInstance<ButtonReactionManager>.Instance.Dispose();
 
