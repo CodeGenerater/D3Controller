@@ -1,6 +1,6 @@
 ﻿namespace CodeGenerater.Diablo3.ControlWithController
 {
-	enum StickBindingRule
+	public enum StickBindingRule
 	{
 		Move,
 		Around,

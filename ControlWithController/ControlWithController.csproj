@@ -65,6 +65,7 @@
     <Compile Include="Class\Range.cs" />
     <Compile Include="Enum\StickBindingRule.cs" />
     <Compile Include="Class\Converter\StickBindingRuleConverter.cs" />
+    <Compile Include="SerializationManager.cs" />
     <Page Include="Dialog\KeySettingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Class\Converter\MouseButtonConverter.cs" />
     <Compile Include="Class\Converter\PointConverter.cs" />
+    <Compile Include="OpenSettingCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

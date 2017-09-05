@@ -54,7 +54,7 @@
 			</Grid>
 			<Rectangle Grid.Row="5" Grid.ColumnSpan="2" Fill="{StaticResource RectangleFillBrush}"/>
 			<TextBlock Text="Offset" Grid.Row="6" HorizontalAlignment="Center"/>
-			<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Path=Offset, Converter={StaticResource PointConverter}}"/>
+			<TextBox Grid.Row="6" Grid.Column="1" TextAlignment="Center" Text="{Binding Path=Offset, Converter={StaticResource PointConverter}}"/>
 		</Grid>
 	</Viewbox>
 </Window>

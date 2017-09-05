@@ -81,7 +81,7 @@ namespace CodeGenerater.Diablo3.ControlWithController
 
 				App.Current.Dispatcher.Invoke(() =>
 				{
-					if (!StickDelay.CheckDelay(e.Stick)) return;
+					if (!SingleInstance<DelayManager<Direction>>.Instance.CheckDelay(e.Stick)) return;
 					if (App.Current == null || App.Current.MainWindow == null) return;
 					var E = App.Current.MainWindow.FindName($"Ellipse_{e.Stick}") as UIElement;
 					if (E == null) return;

@@ -8,32 +8,33 @@ namespace CodeGenerater.Diablo3.ControlWithController
 	public partial class KeySettingDialog : Window
 	{
 		#region Constructor
-		KeySettingDialog()
+		public KeySettingDialog()
 		{
 			InitializeComponent();
-		}
-
-		public KeySettingDialog(KeySetting Setting) : this()
-		{
-			this.Setting = Setting;
 		}
 		#endregion
 
 		#region Field
-		KeySetting Setting;
+		KeySetting _Setting;
+		#endregion
+
+		#region Property
+		public KeySetting Setting
+		{
+			set => DataContext = _Setting = value;
+			get => _Setting;
+		}
 		#endregion
 
 		#region Event Handler
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			ComboBox_MouseButton.ItemsSource = GetComboBoxItems();
-
-			DataContext = Setting;
 		}
 
 		private void TextBox_KeyDown(object sender, KeyEventArgs e)
 		{
-			Setting.Key = e.Key;
+			_Setting.Key = e.Key;
 			(sender as UIElement).MoveFocus(new TraversalRequest(FocusNavigationDirection.Previous));
 			e.Handled = true;
 		}

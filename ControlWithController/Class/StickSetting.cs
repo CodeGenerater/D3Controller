@@ -4,8 +4,16 @@ using CodeGenerater.Diablo3.Controller;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
-	class StickSetting : INotifyPropertyChanged
+	public class StickSetting : INotifyPropertyChanged
 	{
+		#region Constructor
+		public StickSetting()
+		{
+			MoveRange = new Range<int>() { From = 0, To = 50 };
+			AroundRange = new Range<int>() { From = 0, To = 200 };
+		}
+		#endregion
+
 		#region Field
 		Direction _Stick;
 

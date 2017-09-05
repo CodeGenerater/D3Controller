@@ -25,6 +25,8 @@ namespace CodeGenerater.Diablo3.ControlWithController
 				return _Instance;
 			}
 		}
+
+		public static bool IsExist => _Instance != null;
 		#endregion
 	}
 }

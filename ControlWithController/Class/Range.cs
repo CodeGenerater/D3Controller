@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
-	class Range<T> : INotifyPropertyChanged where T : IComparable<T>
+	public class Range<T> : INotifyPropertyChanged where T : IComparable<T>
 	{
 		#region Field
 		T _From;

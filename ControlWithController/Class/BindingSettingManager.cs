@@ -13,13 +13,16 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		public BindingSettingManager()
 		{
 			KeySettingDict = new Dictionary<PadButtons, KeySetting>(Enum.GetValues(typeof(PadButtons)).Length);
+			StickSettingDict = new Dictionary<Direction, StickSetting>(2);
 
 			SingleInstance<XInputController>.Instance.ButtonPressed += Controller_ButtonPressed;
+			SingleInstance<XInputController>.Instance.StickMoved += Controller_StickMoved;
 		}
 		#endregion
 
 		#region Field
 		Dictionary<PadButtons, KeySetting> KeySettingDict;
+		Dictionary<Direction, StickSetting> StickSettingDict;
 
 		bool IsDisposed;
 		#endregion
@@ -30,9 +33,20 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			get
 			{
 				if (!KeySettingDict.ContainsKey(B))
-					KeySettingDict.Add(B, new KeySetting());
+					KeySettingDict.Add(B, new KeySetting() { Button = B });
 
 				return KeySettingDict[B];
+			}
+		}
+
+		public StickSetting this[Direction D]
+		{
+			get
+			{
+				if (!StickSettingDict.ContainsKey(D))
+					StickSettingDict.Add(D, new StickSetting() { Stick = D });
+
+				return StickSettingDict[D];
 			}
 		}
 		#endregion
@@ -84,7 +98,44 @@ namespace CodeGenerater.Diablo3.ControlWithController
 							m.Click(Setting.MouseButton.Value);
 
 						if (Setting.MoveX != 0 || Setting.MoveY != 0)
-							m.MoveRelative(Setting.MoveX, Setting.MoveY);
+							m.MoveRelative(Setting.MoveX, -Setting.MoveY);
+					}
+				});
+			}
+			catch (Exception)
+			{
+
+			}
+		}
+
+		private void Controller_StickMoved(object sender, StickEventArgs e)
+		{
+			try
+			{
+				if (IsDisposed) return;
+
+				App.Current.Dispatcher.Invoke(() =>
+				{
+					if (!SingleInstance<DelayManager<Direction>>.Instance.CheckDelay(e.Stick)) return;
+					if (App.Current == null || App.Current.MainWindow == null) return;
+
+					var Setting = this[e.Stick];
+					
+					switch (Setting.StickBindingRule)
+					{
+						case StickBindingRule.Move:
+							if (e.X == 0 && e.Y == 0) return;
+							var MoveValue = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), Setting.MoveRange.To - Setting.MoveRange.From);
+							m.MoveRelative(
+								(int)Math.Round(MoveValue.Item1 + Setting.MoveRange.From),
+								(int)Math.Round(MoveValue.Item2 + Setting.MoveRange.From));
+							break;
+						case StickBindingRule.Around:
+							var AroundValue = StickHelper.AsCircular(Tuple.Create(e.X, e.Y), Setting.AroundRange.To - Setting.AroundRange.From);
+							m.SetPosition(
+								(int)Math.Round(Setting.Offset.X + AroundValue.Item1 + Setting.AroundRange.From),
+								(int)Math.Round(Setting.Offset.Y + AroundValue.Item2 + Setting.AroundRange.From));
+							break;
 					}
 				});
 			}

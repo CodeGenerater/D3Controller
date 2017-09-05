@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Diagnostics;
+using CodeGenerater.Diablo3.Controller;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
@@ -16,7 +17,6 @@ namespace CodeGenerater.Diablo3.ControlWithController
 		#endregion
 
 		#region Field
-		ButtonReactionManager brm;
 		#endregion
 
 		#region Event Handler
@@ -26,21 +26,20 @@ namespace CodeGenerater.Diablo3.ControlWithController
 			//	Process.Start(Path.Combine(Environment.CurrentDirectory, "CWCLog"));
 
 			//Logger.Init();
-
-			KeySetting Setting = new KeySetting();
-			Setting.Button = Controller.PadButtons.Start;
-			Setting.BindToKeyboard = true;
-			Setting.Key = System.Windows.Input.Key.Enter;
-			Setting.MacroBindingRule = MacroBindingRule.Toggle;
-
-			KeySettingDialog Dialog = new KeySettingDialog(Setting);
-
-			Dialog.ShowDialog();
 		}
 
 		private void Window_Closed(object sender, EventArgs e)
 		{
-			brm?.Dispose();
+			if (SingleInstance<ButtonReactionManager>.IsExist)
+				SingleInstance<ButtonReactionManager>.Instance.Dispose();
+
+			if (SingleInstance<BindingSettingManager>.IsExist)
+				SingleInstance<BindingSettingManager>.Instance.Dispose();
+
+			System.Threading.Thread.Sleep(3);
+
+			if (SingleInstance<XInputController>.IsExist)
+				SingleInstance<XInputController>.Instance.Dispose();
 		}
 		#endregion
 	}

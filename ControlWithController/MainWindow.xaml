@@ -34,6 +34,7 @@
 		<Style TargetType="GroupBox">
 			<Setter Property="Margin" Value="5"/>
 		</Style>
+		<local:OpenSettingCommand x:Key="SettingCommand"/>
 	</Window.Resources>
 
 	<Grid Margin="5">
@@ -54,7 +55,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Button Name="LeftTrigger" Content="Trigger" Grid.Row="0"/>
-				<Button Name="LeftShoulder" Content="Shoulder" Grid.Row="1"/>
+				<Button Name="LeftShoulder" Content="Shoulder" Grid.Row="1" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
 			</Grid>
 		</GroupBox>
 		<Button Margin="30" Content="Key Setting" Grid.Row="0" Grid.Column="1"/>
@@ -65,7 +66,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<Button Name="RightTrigger" Content="Trigger" Grid.Row="0"/>
-				<Button Name="RightShoulder" Content="Shoulder" Grid.Row="1"/>
+				<Button Name="RightShoulder" Content="Shoulder" Grid.Row="1" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
 			</Grid>
 		</GroupBox>
 		<GroupBox Grid.Row="1" Grid.Column="0" Header="D-Pad">
@@ -80,10 +81,10 @@
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<Button Name="DPadLeft" Content="←" Grid.Row="1" Grid.Column="0"/>
-				<Button Name="DPadRight" Content="→" Grid.Row="1" Grid.Column="2"/>
-				<Button Name="DPadUp" Content="↑" Grid.Row="0" Grid.Column="1"/>
-				<Button Name="DPadDown" Content="↓" Grid.Row="2" Grid.Column="1"/>
+				<Button Name="DPadLeft" Content="←" Grid.Row="1" Grid.Column="0" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Name="DPadRight" Content="→" Grid.Row="1" Grid.Column="2" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Name="DPadUp" Content="↑" Grid.Row="0" Grid.Column="1" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Name="DPadDown" Content="↓" Grid.Row="2" Grid.Column="1" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
 			</Grid>
 		</GroupBox>
 		<GroupBox Grid.Row="1" Grid.Column="1" Header="System">
@@ -92,8 +93,8 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<Button Name="Start" Grid.Row="0" Content="Start" Tag="Start"/>
-				<Button Name="Back" Grid.Row="1" Content="Back" Tag="Back"/>
+				<Button Name="Start" Grid.Row="0" Content="Start" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Name="Back" Grid.Row="1" Content="Back" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
 			</Grid>
 		</GroupBox>
 		<GroupBox Grid.Row="1" Grid.Column="2" Header="Input">
@@ -108,14 +109,14 @@
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="*"/>
 				</Grid.ColumnDefinitions>
-				<Button Content="X" Name="X" Grid.Row="1" Grid.Column="0"/>
-				<Button Content="B" Name="B" Grid.Row="1" Grid.Column="2"/>
-				<Button Content="Y" Name="Y" Grid.Row="0" Grid.Column="1"/>
-				<Button Content="A" Name="A" Grid.Row="2" Grid.Column="1"/>
+				<Button Content="X" Name="X" Grid.Row="1" Grid.Column="0" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Content="B" Name="B" Grid.Row="1" Grid.Column="2" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Content="Y" Name="Y" Grid.Row="0" Grid.Column="1" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
+				<Button Content="A" Name="A" Grid.Row="2" Grid.Column="1" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}"/>
 			</Grid>
 		</GroupBox>
 		<GroupBox Grid.Row="2" Grid.Column="0" Header="Left Stick">
-			<Button Name="LeftThumb">
+			<Button Name="LeftThumb" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}">
 				<Viewbox>
 					<Canvas Width="300" Height="300">
 						<Ellipse Width="15" Height="15" Fill="White" Canvas.Left="150" Canvas.Bottom="150" Name="Ellipse_Left"/>
@@ -125,13 +126,13 @@
 		</GroupBox>
 		<Button Margin="30" Content="Macro Setting" Grid.Row="2" Grid.Column="1"/>
 		<GroupBox Grid.Row="2" Grid.Column="2" Header="Right Stick">
-				<Button Name="RightThumb">
-					<Viewbox>
-						<Canvas Width="300" Height="300">
+			<Button Name="RightThumb" Command="{StaticResource SettingCommand}" CommandParameter="{Binding Name, RelativeSource={RelativeSource Self}}">
+				<Viewbox>
+					<Canvas Width="300" Height="300">
 							<Ellipse Width="15" Height="15" Fill="White" Canvas.Left="150" Canvas.Bottom="150" Name="Ellipse_Right"/>
 						</Canvas>
-					</Viewbox>
-				</Button>
-			</GroupBox>
+				</Viewbox>
+			</Button>
+		</GroupBox>
 	</Grid>
 </Window>
