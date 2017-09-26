@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Diagnostics;
+using CodeGenerater.Diablo3.Macro;
 using CodeGenerater.Diablo3.Controller;
 
 namespace CodeGenerater.Diablo3.ControlWithController
@@ -34,6 +35,9 @@ namespace CodeGenerater.Diablo3.ControlWithController
 
 			if (SingleInstance<BindingSettingManager>.IsExist)
 				SingleInstance<BindingSettingManager>.Instance.Dispose();
+
+			if (SingleInstance<MacroManager>.IsExist)
+				SingleInstance<MacroManager>.Instance.Dispose();
 
 			System.Threading.Thread.Sleep(3);
 

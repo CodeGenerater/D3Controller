@@ -2,12 +2,14 @@
 using System.Threading;
 using System.Windows.Input;
 using System.ComponentModel;
-using k = CodeGenerater.Macro.HardwareControl.Keyboard;
+using System.Runtime.Serialization;
 using m = CodeGenerater.Macro.HardwareControl.Mouse;
+using k = CodeGenerater.Macro.HardwareControl.Keyboard;
 
 namespace CodeGenerater.Diablo3.Macro
 {
-	public class MacroKey : INotifyPropertyChanged, IDisposable
+	[Serializable]
+	public class MacroKey : INotifyPropertyChanged, IDisposable, ISerializable
 	{
 		#region Constructor
 		public MacroKey()
@@ -35,6 +37,7 @@ namespace CodeGenerater.Diablo3.Macro
 		#endregion
 
 		#region Property
+		[SerializationTarget]
 		public object Key
 		{
 			set
@@ -57,6 +60,7 @@ namespace CodeGenerater.Diablo3.Macro
 
 		public int KeyCode => ToKeyCode(_Key);
 
+		[SerializationTarget]
 		public MacroRule Rule
 		{
 			set
@@ -73,6 +77,7 @@ namespace CodeGenerater.Diablo3.Macro
 			}
 		}
 
+		[SerializationTarget]
 		public int Interval
 		{
 			set
@@ -160,6 +165,9 @@ namespace CodeGenerater.Diablo3.Macro
 			}
 			else
 			{
+				if ((Key)Key == System.Windows.Input.Key.None)
+					return;
+
 				k.KeyDown(_Key);
 				k.KeyUp(_Key);
 			}
@@ -185,10 +193,12 @@ namespace CodeGenerater.Diablo3.Macro
 		#endregion
 
 		#region Interface Implement
+		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void Notify(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-
+		#endregion
+		#region IDisposable
 		public void Dispose()
 		{
 			if (T != null)
@@ -199,6 +209,20 @@ namespace CodeGenerater.Diablo3.Macro
 				T = null;
 			}
 		}
+		#endregion
+		#region ISerializable
+		public void GetObjectData(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Serialize(this, Info);
+		}
+
+		MacroKey(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Deserialize(this, Info);
+			T = new Thread(ThreadProc);
+			T.Start();
+		}
+		#endregion
 		#endregion
 	}
 }

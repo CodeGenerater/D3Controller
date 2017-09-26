@@ -2,7 +2,7 @@
 {
 	public enum MacroRule
 	{
-		Once,
 		Repeat,
+		Once,
 	}
 }

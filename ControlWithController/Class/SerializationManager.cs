@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using CodeGenerater.Diablo3.Macro;
 
 namespace CodeGenerater.Diablo3.ControlWithController
 {
@@ -71,6 +72,8 @@ namespace CodeGenerater.Diablo3.ControlWithController
 					continue;
 				else if (each is BindingSettingManager)
 					SingleInstance<BindingSettingManager>.Instance = each as BindingSettingManager;
+				else if (each is MacroManager)
+					SingleInstance<MacroManager>.Instance = each as MacroManager;
 					
 		}
 
@@ -80,6 +83,8 @@ namespace CodeGenerater.Diablo3.ControlWithController
 
 			if (SingleInstance<BindingSettingManager>.IsExist)
 				List.Add(SingleInstance<BindingSettingManager>.Instance);
+			if (SingleInstance<MacroManager>.IsExist)
+				List.Add(SingleInstance<MacroManager>.Instance);
 
 			return List;
 		}

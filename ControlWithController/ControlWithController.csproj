@@ -65,9 +65,16 @@
     <Compile Include="Class\Range.cs" />
     <Compile Include="Enum\StickBindingRule.cs" />
     <Compile Include="Class\Converter\StickBindingRuleConverter.cs" />
-    <Compile Include="SerializationHelper.cs" />
-    <Compile Include="SerializationManager.cs" />
+    <Compile Include="Dialog\MacroDialog.xaml.cs">
+      <DependentUpon>MacroDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\SerializationHelper.cs" />
+    <Compile Include="Class\SerializationManager.cs" />
     <Page Include="Dialog\KeySettingDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\MacroDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -89,6 +96,9 @@
     <Compile Include="Class\Logger.cs" />
     <Compile Include="Enum\MacroBindingRule.cs" />
     <Compile Include="Class\Converter\MacroBindingRuleConverter.cs" />
+    <Compile Include="Class\Command\MacroAddCommand.cs" />
+    <Compile Include="Class\Command\MacroRemoveCommand.cs" />
+    <Compile Include="MacroMoveUpCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -101,7 +111,7 @@
   <ItemGroup>
     <Compile Include="Class\Converter\MouseButtonConverter.cs" />
     <Compile Include="Class\Converter\PointConverter.cs" />
-    <Compile Include="OpenSettingCommand.cs" />
+    <Compile Include="Class\Command\OpenSettingCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

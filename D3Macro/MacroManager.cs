@@ -1,20 +1,29 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Collections.ObjectModel;
 
 namespace CodeGenerater.Diablo3.Macro
 {
-	public class MacroManager : IDisposable, INotifyPropertyChanged
+	[Serializable]
+	public class MacroManager : IDisposable, INotifyPropertyChanged, ISerializable
 	{
+		#region Constructor
+		public MacroManager()
+		{
+
+		}
+		#endregion
+
 		#region Field
+		[SerializationTarget]
 		ObservableCollection<MacroKey> MacroList = new ObservableCollection<MacroKey>();
 
 		bool _NowRun;
 		#endregion
 		
 		#region Property
-		public IEnumerable<MacroKey> List => MacroList;
+		public ObservableCollection<MacroKey> List => MacroList;
 
 		public bool NowRun
 		{
@@ -82,6 +91,7 @@ namespace CodeGenerater.Diablo3.Macro
 		#endregion
 
 		#region Interface Implement
+		#region IDisposable
 		public void Dispose()
 		{
 			Stop();
@@ -92,10 +102,23 @@ namespace CodeGenerater.Diablo3.Macro
 			MacroList.Clear();
 			MacroList = null;
 		}
-
+		#endregion
+		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void Notify(string PropertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+		#endregion
+		#region ISerializable
+		public void GetObjectData(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Serialize(this, Info);
+		}
+
+		MacroManager(SerializationInfo Info, StreamingContext Context)
+		{
+			SerializationHelper.Deserialize(this, Info);
+		}
+		#endregion
 		#endregion
 	}
 }

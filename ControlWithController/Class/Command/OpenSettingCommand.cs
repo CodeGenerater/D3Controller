@@ -22,6 +22,11 @@ namespace CodeGenerater.Diablo3.ControlWithController
 				Dialog.Setting = SingleInstance<BindingSettingManager>.Instance[(Direction)Enum.Parse(typeof(Direction), Param.Replace("Stick", string.Empty))];
 				Dialog.ShowDialog();
 			}
+			else if (Param == "Macro")
+			{
+				MacroDialog Dialog = new MacroDialog();
+				Dialog.ShowDialog();
+			}
 			else
 			{
 				KeySettingDialog Dialog = new KeySettingDialog();
